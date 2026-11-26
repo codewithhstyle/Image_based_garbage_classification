@@ -15,7 +15,7 @@
 * **Submitted by:**
   * **SK AMIR HOSSAIN** — Roll No: `24101106031`
   * **PRATIK PATRA** — Roll No: `24101106032`
-* **Submitted to & Supervised by:** Somnath Dhibar (Project Mentor & Evaluator)
+* **Submitted to & Supervised by:**Prof. Somnath Dhibar (Project Mentor & Evaluator)
 
 ---
 
