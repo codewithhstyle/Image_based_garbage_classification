@@ -77,7 +77,6 @@ garbage-classification/
 4. Once the final cell runs (`interface.launch(share=False, debug=True)`), scroll down to use the embedded Gradio app directly inside the notebook.
 5. Upload any image of glass, plastic, paper, or metal to view the predicted class and confidence scores.
 
-> **Note:** `share=False` is used by default to run the interface directly inside Colab and avoid temporary `.gradio.live` 504 Gateway Timeout issues during live demonstrations.
 
 ---
 
