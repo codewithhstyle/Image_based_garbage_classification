@@ -17,7 +17,7 @@ An end-to-end Computer Vision project that automatically classifies waste images
 * **Submitted by:**
   * **SK AMIR HOSSAIN** — Roll No: `24101106031`
   * **PRATIK PATRA** — Roll No: `24101106032`
-* **Submitted to & Supervised by:** Prof. Somnath Dhibar *(Project Mentor & Evaluator)*
+* **Submitted to & Supervised by:** Dr. Somnath Dhibar *(Project Mentor & Evaluator)*
 
 ---
 
@@ -90,6 +90,12 @@ This project uses the publicly available **TrashNet** dataset.
 garbage-classification/
 ├── garbage_classification.ipynb   # Main Google Colab notebook (training + Gradio UI)
 ├── README.md                      # Project documentation
+├── requirements.txt               # Python dependencies
+├── test_images/                   # Sample test images for quick evaluation
+│   ├── glass_sample.jpg
+│   ├── metal_sample.jpg
+│   ├── paper_sample.jpg
+│   └── plastic_sample.jpg
 └── (Generated in Colab Runtime)
     ├── dataset-resized/           # Filtered TrashNet dataset (glass, plastic, paper, metal)
     ├── dataset-split/
@@ -122,9 +128,10 @@ You do not need to install Python or TensorFlow on your computer to run this pro
 3. Run the entire notebook via **Runtime** > **Run all**.
 4. Wait for the dataset to download and the model to train (typically 3–5 minutes on a T4 GPU).
 5. Scroll to the final cell (**Section 5: Web User Interface**) to use the embedded Gradio app:
-   * Upload an image of glass, plastic, paper, or metal from your device.
+   * Upload an image of glass, plastic, paper, or metal from your device (or use the samples in `test_images/`).
    * Click **Submit** to view the predicted category and confidence percentages.
 
+> **Note on Stability:** The interface is configured with `share=False` so it runs directly inside the Google Colab notebook, ensuring a reliable demonstration without risking external `504 Gateway Timeout` errors from temporary `.gradio.live` links.
 
 ---
 
