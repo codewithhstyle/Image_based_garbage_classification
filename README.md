@@ -17,7 +17,7 @@ An end-to-end Computer Vision project that automatically classifies waste images
 * **Submitted by:**
   * **SK AMIR HOSSAIN** — Roll No: `24101106031`
   * **PRATIK PATRA** — Roll No: `24101106032`
-* **Submitted to & Supervised by:** Dr. Somnath Dhibar *(Project Mentor & Evaluator)*
+* **Submitted to & Supervised by:** Prof. Somnath Dhibar *(Project Mentor & Evaluator)*
 
 ---
 
@@ -131,7 +131,6 @@ You do not need to install Python or TensorFlow on your computer to run this pro
    * Upload an image of glass, plastic, paper, or metal from your device (or use the samples in `test_images/`).
    * Click **Submit** to view the predicted category and confidence percentages.
 
-> **Note on Stability:** The interface is configured with `share=False` so it runs directly inside the Google Colab notebook, ensuring a reliable demonstration without risking external `504 Gateway Timeout` errors from temporary `.gradio.live` links.
 
 ---
 
