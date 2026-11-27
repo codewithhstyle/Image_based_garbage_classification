@@ -1,0 +1,21 @@
+# Byte-compiled / Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+
+# Virtual environments
+venv/
+env/
+.venv/
+
+# Dataset folders (auto-downloaded in Colab)
+dataset-resized/
+dataset-split/
+*.zip
+
+# OS generated files
+.DS_Store
+Thumbs.db
