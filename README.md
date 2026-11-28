@@ -83,27 +83,49 @@ This project uses the publicly available **TrashNet** dataset.
 | **Final Test Loss** | `0.4135` |
 
 ---
-
 ## 📁 Project Structure
 
 ```text
 garbage-classification/
-├── garbage_classification.ipynb   # Main Google Colab notebook (training + Gradio UI)
-├── README.md                      # Project documentation
-├── requirements.txt               # Python dependencies
-├── test_images/                   # Sample test images for quick evaluation
+├── garbage_classification.ipynb               # Main Google Colab notebook (training + Gradio UI)
+├── README.md                                  # Project documentation
+├── requirements.txt                           # Python dependencies
+├── test_images/                               # Sample test images for quick evaluation
 │   ├── glass_sample.jpg
 │   ├── metal_sample.jpg
 │   ├── paper_sample.jpg
 │   └── plastic_sample.jpg
+├── project_report/                            # Academic project report (PDF + Overleaf LaTeX source)
+│   ├── garbage_classification_report__.pdf    # Final compiled project report (PDF)
+│   ├── main.tex                               # Main LaTeX entry point
+│   ├── preamble.tex                           # Packages, layout, and styling
+│   ├── titlepage.tex                          # Title page layout
+│   ├── references.tex                         # Bibliography / references
+│   ├── gradio_screenshot.png                  # Gradio web UI prediction screenshot
+│   ├── abstract.tex
+│   ├── introduction.tex
+│   ├── problem.tex
+│   ├── literature.tex
+│   ├── requirements.tex
+│   ├── technologies.tex
+│   ├── dataset.tex
+│   ├── methodology.tex
+│   ├── implementation.tex
+│   ├── results.tex
+│   ├── comparison.tex
+│   ├── limitations.tex
+│   ├── future.tex
+│   └── conclusion.tex
 └── (Generated in Colab Runtime)
-    ├── dataset-resized/           # Filtered TrashNet dataset (glass, plastic, paper, metal)
+    ├── dataset-resized/                       # Filtered TrashNet dataset (glass, plastic, paper, metal)
     ├── dataset-split/
-    │   ├── train/                 # 70% training images
-    │   ├── val/                   # 15% validation images
-    │   └── test/                  # 15% test images
-    └── garbage_classifier.keras   # Saved best fine-tuned MobileNetV2 model
+    │   ├── train/                             # 70% training images
+    │   ├── val/                               # 15% validation images
+    │   └── test/                              # 15% test images
+    └── garbage_classifier.keras               # Saved best fine-tuned MobileNetV2 model
 ```
+
+
 
 ### Notebook Sections
 
