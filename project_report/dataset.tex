@@ -1,0 +1,25 @@
+\section{Dataset Description}
+The project uses the TrashNet dataset (resized version)~\cite{trashnet}, a public dataset of photographs of single waste items placed on a white background under varying lighting and orientation. The original dataset has six classes (glass, paper, cardboard, plastic, metal, trash). For this project it was filtered to \textbf{four material classes}: glass, plastic, paper and metal.
+
+\tablestyle
+\begin{table}[h]
+\centering
+\caption{Classes used from TrashNet}
+\begin{tabularx}{\textwidth}{|l|r|X|}\hline
+\hdrrow \hdr{Class} & \hdr{Approx.\ images} & \hdr{Remarks} \\
+\hline
+Glass   & 501 & Bottles, jars \\
+\hline
+Paper   & 594 & Sheets, printed paper \\
+\hline
+Metal   & 410 & Cans, tins \\
+\hline
+Plastic & 482 & Bottles, containers \\
+\hline
+\textbf{Total} & $\mathbf{\approx 1{,}987}$ & Filtered from 2,527 original images \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Train / Validation / Test Split}
+The filtered dataset was split into training (\textbf{70\%}), validation (\textbf{15\%}) and test (\textbf{15\%}) sets using the split-folders library with a fixed random seed (\textbf{42}) for reproducibility. The test set is never used during training and gives an unbiased estimate of real-world performance.

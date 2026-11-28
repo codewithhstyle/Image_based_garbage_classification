@@ -1,0 +1,21 @@
+\section{Results and Evaluation}
+The model was evaluated on the held-out test set (about 15\% of the data) using the saved best model.
+
+\tablestyle
+\begin{table}[h]
+\centering
+\caption{Performance of the proposed model}
+\begin{tabularx}{\textwidth}{|l|X|}\hline
+\hdrrow \hdr{Metric} & \hdr{Value} \\
+\hline
+Final test accuracy & \textbf{85--87\%} \\
+\hline
+Test loss           & \textbf{0.4214} \\
+\hline
+Training time       & \textbf{10--12 min} \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Discussion}
+Transfer learning allows a model trained on only about two thousand images to reach high accuracy, because the low-level features learned from ImageNet (edges, textures, shapes) transfer well to waste images. Data augmentation and dropout limit over-fitting, and fine-tuning the last 20 layers adapts the high-level features to the four material classes. Classes with similar appearance, such as glass and transparent plastic, or crumpled paper and light metal, are the most likely to be confused.

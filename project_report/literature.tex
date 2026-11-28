@@ -1,0 +1,6 @@
+\section{Literature Review}
+Waste image classification has been studied widely since the release of the TrashNet dataset by Yang and Thung at Stanford University (2016)~\cite{yang}. Their original CS229 work compared a Support Vector Machine on hand-crafted features with a small CNN. Later work moved to deeper pre-trained networks.
+
+Bircano\u{g}lu et al.\ (2018)~\cite{recyclenet} tested several architectures, including ResNet50, MobileNet, InceptionResNetV2, Xception and DenseNet variants, and reported about 95\% accuracy with fine-tuned DenseNet121. Adedeji and Wang~\cite{adedeji} used ResNet-50 as a feature extractor with an SVM classifier and reported about 87\% accuracy. Other studies have proposed lightweight or improved architectures such as WasNet, improved EfficientNetV2 and MobileNetV3-based models, reaching 96\% or higher on TrashNet~\cite{effnet}.
+
+A recent comparison of MobileNetV2 and VGG16 with transfer learning for multi-class waste classification found that MobileNetV2 reached 95.6\% test accuracy against 89.13\% for VGG16, while also being more computationally efficient~\cite{mobvgg}. These findings support the choice of MobileNetV2 in this project, where accuracy, model size and speed all matter.

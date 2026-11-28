@@ -1,0 +1,16 @@
+\begin{center}{\Large\bfseries ABSTRACT}\end{center}\vspace{-4pt}\noindent\rule{\textwidth}{0.8pt}
+\addcontentsline{toc}{section}{Abstract}
+
+Improper segregation of waste is one of the main obstacles to effective recycling. Manual sorting is slow, costly and error-prone. This project presents an image-based garbage classification system that automatically identifies the material of a waste item from a single photograph. The system classifies items into four recyclable categories --- \textbf{glass, plastic, paper and metal} --- using the \textbf{TrashNet} dataset.
+
+A transfer-learning approach is used: a \textbf{MobileNetV2} network pre-trained on ImageNet is used as a feature extractor, followed by Global Average Pooling, a Dropout layer and a four-neuron Softmax output layer. The model is trained in two stages (feature extraction, then fine-tuning of the last 20 layers at a very low learning rate), with data augmentation to reduce over-fitting on the small dataset. The trained model is deployed through a Gradio web interface where a user can upload an image and view the confidence of each class. The achieved test accuracy was \textbf{85--87\%}.
+
+\medskip
+\textit{\textbf{Keywords:} Garbage classification, waste segregation, deep learning, transfer learning, MobileNetV2, TrashNet, Gradio.}
+
+\bigskip
+\begin{figure}[h]
+  \centering
+  \screenshot
+  \caption{Gradio web interface showing class confidence for an uploaded image.}
+\end{figure}

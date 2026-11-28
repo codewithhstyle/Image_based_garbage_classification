@@ -1,0 +1,96 @@
+\section{Methodology}
+The overall workflow is:
+
+\begin{center}
+\begin{tikzpicture}[node distance=0.35cm,
+  box/.style={draw=black,align=center,
+              minimum width=1.7cm,minimum height=1.0cm,font=\scriptsize}]
+  \node[box] (a) {Dataset\\download};
+  \node[box,right=of a] (b) {Class\\filtering};
+  \node[box,right=of b] (c) {Train/Val/\\Test split};
+  \node[box,right=of c] (d) {Pre-process\\+ augment};
+  \node[box,right=of d] (e) {MobileNetV2\\transfer};
+  \node[box,right=of e] (f) {Fine-\\tuning};
+  \node[box,right=of f] (g) {Evaluation};
+  \node[box,right=of g] (h) {Deploy\\(Gradio)};
+  \foreach \s/\t in {a/b,b/c,c/d,d/e,e/f,f/g,g/h}
+    \draw[->] (\s) -- (\t);
+\end{tikzpicture}
+\end{center}
+
+\subsection{Pre-processing and Data Augmentation}
+All images are resized to $224\times224$ pixels, the input size of MobileNetV2, and normalised using the MobileNetV2 preprocessing function (pixel values scaled to the range $-1$ to $1$). To make the model robust and to compensate for the small dataset, the training images are randomly augmented in each epoch. Validation and test images are only pre-processed, never augmented.
+
+\tablestyle
+\begin{table}[h]
+\centering
+\caption{Data augmentation settings (training set only)}
+\begin{tabularx}{\textwidth}{|l|l|X|}\hline
+\hdrrow \hdr{Augmentation} & \hdr{Value} & \hdr{Purpose} \\
+\hline
+Rotation          & $\pm 20^\circ$ & Handles items in different orientations \\
+\hline
+Width shift       & 20\%           & Handles off-centre objects \\
+\hline
+Height shift      & 20\%           & Handles off-centre objects \\
+\hline
+Horizontal flip   & Yes            & Doubles effective pose variety \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Model Architecture}
+MobileNetV2~\cite{mobilenet} is built on depth-wise separable convolutions and inverted residual blocks with linear bottlenecks, which greatly reduce parameters and computation compared with traditional CNNs such as VGG16. The ImageNet-pretrained network (without its original classification head) is used as the base, and a new classification head is added.
+
+\tablestyle
+\begin{table}[h]
+\centering
+\caption{Model architecture}
+\begin{tabularx}{\textwidth}{|c|l|X|}\hline
+\hdrrow \hdr{No.} & \hdr{Layer} & \hdr{Description} \\
+\hline
+1 & MobileNetV2 (base)     & Pre-trained on ImageNet, input $224\times224\times3$, produces feature maps \\
+\hline
+2 & GlobalAveragePooling2D & Converts feature maps to a single feature vector \\
+\hline
+3 & Dropout (0.2)          & Randomly drops 20\% of units to reduce over-fitting \\
+\hline
+4 & Dense (4, Softmax)     & Outputs probability for glass, metal, paper, plastic \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Training Strategy}
+Training is carried out in \textbf{two stages}.
+\begin{itemize}
+  \item \textbf{Stage 1 -- Feature extraction:} the whole MobileNetV2 base is frozen and only the new head is trained for up to 10 epochs using the Adam optimiser (learning rate \textbf{0.001}) and categorical cross-entropy loss.
+  \item \textbf{Stage 2 -- Fine-tuning:} all layers except the last 20 of the base network stay frozen; these \textbf{last 20 layers} are unfrozen and trained for 5 more epochs with a very low learning rate (\textbf{$1\times10^{-5}$}) so that the pre-trained knowledge is adjusted gently to garbage images instead of being destroyed.
+\end{itemize}
+
+Two callbacks are used. \textbf{ModelCheckpoint} saves the model with the highest validation accuracy, and \textbf{EarlyStopping} (patience $=4$, monitoring validation loss) stops training when the model stops improving and restores the best weights.
+
+\tablestyle
+\begin{table}[h]
+\centering
+\caption{Training hyper-parameters}
+\begin{tabularx}{\textwidth}{|l|X|}\hline
+\hdrrow \hdr{Hyper-parameter} & \hdr{Value} \\
+\hline
+Image size                        & $224\times224$ \\
+\hline
+Batch size                        & 32 \\
+\hline
+Optimiser                         & Adam \\
+\hline
+Learning rate (Stage 1 / Stage 2) & $10^{-3}$ / $10^{-5}$ \\
+\hline
+Loss function                     & Categorical cross-entropy \\
+\hline
+Epochs (Stage 1 / Stage 2)        & 10 (max) / 5 \\
+\hline
+Dropout rate                      & 0.2 \\
+\hline
+Layers fine-tuned                 & Last 20 of MobileNetV2 \\
+\hline
+\end{tabularx}
+\end{table}

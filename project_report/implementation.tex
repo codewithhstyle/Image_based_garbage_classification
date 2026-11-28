@@ -1,0 +1,18 @@
+\section{Implementation}
+The project was implemented in Python on Google Colab in five notebook cells:
+\begin{itemize}
+  \item \textbf{Cell 1} -- installs libraries, downloads TrashNet, filters the four classes and displays sample images.
+  \item \textbf{Cell 2} -- splits the data and creates the training, validation and test generators.
+  \item \textbf{Cell 3} -- builds the MobileNetV2 model, trains it and then fine-tunes it.
+  \item \textbf{Cell 4} -- loads the best saved model (\textbf{garbage\_classifier.keras}) and evaluates it on the test set.
+  \item \textbf{Cell 5} -- creates the Gradio web application for prediction.
+\end{itemize}
+
+\subsection{Web Application}
+The \textbf{Gradio} interface~\cite{gradio} lets the user upload a photograph of a waste item. The image is converted to RGB, resized to $224\times224$, pre-processed with the same MobileNetV2 function used in training and passed to the model. The application then shows the confidence score of all four classes, with the most probable class on top. Using the same pre-processing in training and prediction is essential for correct results.
+
+\begin{figure}[h]
+  \centering
+  \screenshot
+  \caption{Gradio interface predicting \textit{Plastic} with 93\% confidence.}
+\end{figure}

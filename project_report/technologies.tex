@@ -1,0 +1,56 @@
+\section{Technologies Used}
+The following programming language, libraries, tools, pre-trained models and dataset were used to build the project.
+
+\tablestyle
+\begin{table}[h]
+\centering
+\caption{Technologies, libraries and tools used}\small
+\begin{tabularx}{\textwidth}{|p{3cm}|p{3.4cm}|X|}\hline
+\hdrrow \hdr{Category} & \hdr{Technology} & \hdr{Purpose in this project} \\
+\hline
+Language & Python 3 & Main programming language for all code \\
+\hline
+Deep learning framework & TensorFlow 2.x & Building, training, saving and loading the neural network \\
+\hline
+High-level API & Keras (\texttt{tf.keras}) & Sequential model, layers (GlobalAveragePooling2D, Dropout, Dense), optimiser, callbacks \\
+\hline
+Pre-trained model & MobileNetV2 (ImageNet weights) & Base feature extractor for transfer learning \\
+\hline
+Pre-training dataset & ImageNet & Dataset on which MobileNetV2 was originally trained \\
+\hline
+Dataset & TrashNet (resized) & Source images of glass, plastic, paper and metal waste \\
+\hline
+Dataset hosting & Hugging Face Datasets & Download of \texttt{dataset-resized.zip} \\
+\hline
+Data pipeline & Keras ImageDataGenerator & Loading images from folders, resizing, pre-processing and augmentation \\
+\hline
+Dataset splitting & split-folders & 70/15/15 train/validation/test split with fixed seed \\
+\hline
+Optimiser & Adam & Weight updates during training ($10^{-3}$, then $10^{-5}$ for fine-tuning) \\
+\hline
+Callbacks & ModelCheckpoint, EarlyStopping & Save best model; stop training when validation loss stops improving \\
+\hline
+Visualisation & Matplotlib & Displaying sample images, and plotting curves \\
+\hline
+Image processing & Pillow (PIL) & Opening, converting to RGB and resizing uploaded images \\
+\hline
+Web interface & Gradio & Web app for image upload and prediction display (public link via \texttt{share=True}) \\
+\hline
+Development environment & Google Colab (Jupyter notebook) & Cloud environment with free GPU for training and demo \\
+\hline
+System utilities & wget, unzip, pip, os, shutil, random & Downloading and unzipping the dataset, installing libraries, file handling \\
+\hline
+Model format & Keras (\texttt{.keras} file) & Saved model: \texttt{garbage\_classifier.keras} \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Key Concepts}
+\begin{itemize}
+  \item \textbf{Convolutional Neural Network (CNN):} a neural network that learns visual features from images.
+  \item \textbf{Transfer learning:} reusing a model trained on a large dataset (ImageNet) for a new, smaller task.
+  \item \textbf{Fine-tuning:} unfreezing the last layers of the base model and training them with a very low learning rate.
+  \item \textbf{Data augmentation:} creating modified copies of training images to reduce over-fitting.
+  \item \textbf{Softmax:} the output function that converts scores into class probabilities that sum to one.
+  \item \textbf{Dropout and early stopping:} regularisation techniques that prevent over-fitting.
+\end{itemize}

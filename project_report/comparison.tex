@@ -1,0 +1,45 @@
+\section{Comparison with Other Models}
+Table~\ref{tab:cmp} compares this project with other published deep-learning models on the TrashNet dataset. Very high-accuracy specialised models and other MobileNet variants are left out, so that the table shows commonly used standard architectures (VGG, GoogLeNet, ResNet) that are closest to a student-level project. The figures are taken from the cited papers, so they are indicative rather than exact: the studies differ in their train/test splits, training settings and number of classes (most use all 6 TrashNet classes, whereas this project and Ref.~\cite{gyawali} use 4).
+
+\tablestyle
+\begin{table}[h]
+\centering
+\caption{Comparison with other published models on TrashNet}
+\label{tab:cmp}\footnotesize
+\begin{tabularx}{\textwidth}{|p{1.9cm}|X|p{2.6cm}|p{1.5cm}|p{2.1cm}|}\hline
+\hdrrow \hdr{Model} & \hdr{Architecture \& technology} & \hdr{Dataset} & \hdr{Accuracy} & \hdr{Reference} \\
+\hline
+\textbf{This project} & MobileNetV2 ($\approx$3.4\,M parameters) + GAP + Dropout 0.2 + Dense(4, Softmax); transfer learning (ImageNet), fine-tuning of last 20 layers, augmentation, Adam, TensorFlow/Keras, Gradio & TrashNet, 4 classes, $\approx$1,987 images & \textbf{85--87\%} & Present work \\
+\hline
+ResNet-18 & 18-layer residual network with skip connections; transfer learning with CNN & TrashNet, 4 classes & 87.8\% (val.) & Gyawali et al.~\cite{gyawali} \\
+\hline
+ResNet-50 + SVM & 50-layer residual network as feature extractor; SVM as final classifier & TrashNet, 6 classes & $\approx$87\% & Adedeji \& Wang~\cite{adedeji} \\
+\hline
+VGG-19 & 19-layer plain CNN with stacked $3\times3$ convolutions and fully connected layers; improved/fine-tuned CNN & TrashNet, 6 classes & 88.42\% & Kennedy, in~\cite{effnet} \\
+\hline
+GoogLeNet & 22-layer network built from Inception modules (parallel $1\times1$, $3\times3$, $5\times5$ convolutions); improved/fine-tuned CNN & TrashNet, 6 classes & 90.79\% & Ozkaya, in~\cite{effnet} \\
+\hline
+ResNet-50 & 50-layer residual network with bottleneck blocks; improved/fine-tuned CNN & TrashNet, 6 classes & 92.08\% & Ma, in~\cite{effnet} \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Architecture Comparison}
+\tablestyle
+\begin{table}[h]
+\centering
+\caption{Standard ImageNet architecture sizes (commonly reported values)}
+\begin{tabularx}{\textwidth}{|l|r|l|X|}\hline
+\hdrrow \hdr{Model} & \hdr{Parameters (approx.)} & \hdr{Size} & \hdr{Remarks} \\
+\hline
+VGG16        & 138\,M & Very large & Simple but heavy and slow \\
+\hline
+ResNet-50    & 25\,M  & Large      & Strong accuracy, higher compute \\
+\hline
+DenseNet-121 & 8\,M   & Medium     & High accuracy, memory-hungry \\
+\hline
+\end{tabularx}
+\end{table}
+
+\subsection{Analysis}
+The older and heavier networks in Table~\ref{tab:cmp} (VGG-19, ResNet-50, GoogLeNet) need many more parameters, memory and computation than MobileNetV2, which has only about 3.4 million parameters. ResNet-50 has roughly 25 million and VGG-19 roughly 140 million parameters. MobileNetV2 therefore trains faster and predicts faster, which suits a laptop or low-cost device. A separate study also found MobileNetV2 more accurate than VGG16 (95.6\% vs 89.13\%) while being much lighter~\cite{mobvgg}. This project also classifies four clearly different material classes, which is an easier task than the six-class version that includes the ambiguous \textit{trash} class, so results should be compared with that difference in mind.
